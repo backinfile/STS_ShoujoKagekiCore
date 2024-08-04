@@ -49,7 +49,7 @@ public class SettingsPanel {
             settingsProperties.setProperty(value.name, String.valueOf(value.defaultValue));
         }
         try {
-            SpireConfig config = new SpireConfig(ModPath.ModName, CONFIG_FILE_NAME, settingsProperties);
+            SpireConfig config = new SpireConfig(CoreModPath.ModName, CONFIG_FILE_NAME, settingsProperties);
             config.load();
             for (BoolToggleSettingValue value : toggleSettingValueList) {
                 value.set(config.getBool(value.name));
@@ -61,7 +61,7 @@ public class SettingsPanel {
 
     public static void saveProperties() {
         try {
-            SpireConfig config = new SpireConfig(ModPath.ModName, CONFIG_FILE_NAME, settingsProperties);
+            SpireConfig config = new SpireConfig(CoreModPath.ModName, CONFIG_FILE_NAME, settingsProperties);
             for (BoolToggleSettingValue value : toggleSettingValueList) {
                 config.setBool(value.name, value.get());
             }
@@ -72,7 +72,7 @@ public class SettingsPanel {
     }
 
     public static void initPanel() {
-        UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ModPath.makeID("settingsPanel"));
+        UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(CoreModPath.makeID("settingsPanel"));
 
         ModPanel settingsPanel = new ModPanel();
 
@@ -90,6 +90,6 @@ public class SettingsPanel {
         }
 //
         Texture badgeTexture = TextureLoader.getTexture(BADGE_IMAGE);
-        BaseMod.registerModBadge(badgeTexture, ModPath.ModName, ModPath.AUTHOR, ModPath.DESCRIPTION, settingsPanel);
+        BaseMod.registerModBadge(badgeTexture, CoreModPath.ModName, CoreModPath.AUTHOR, CoreModPath.DESCRIPTION, settingsPanel);
     }
 }

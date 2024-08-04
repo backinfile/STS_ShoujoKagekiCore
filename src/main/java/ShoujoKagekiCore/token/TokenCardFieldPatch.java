@@ -1,7 +1,7 @@
 package ShoujoKagekiCore.token;
 
 
-import ShoujoKagekiCore.ModPath;
+import ShoujoKagekiCore.CoreModPath;
 import ShoujoKagekiCore.util.Utils2;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -156,7 +156,7 @@ public class TokenCardFieldPatch {
         }
     }
 
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ModPath.makeID(TokenCardField.class.getSimpleName()));
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(CoreModPath.makeID(TokenCardField.class.getSimpleName()));
     private static final String TEXT = uiStrings.TEXT[0];
 
     private static void renderTitle(AbstractCard card, SpriteBatch sb) {

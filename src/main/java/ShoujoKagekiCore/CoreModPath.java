@@ -1,6 +1,6 @@
 package ShoujoKagekiCore;
 
-public class ModPath {
+public class CoreModPath {
 
     public static final String ModName = "ShoujoKagekiCore";
     public static final String AUTHOR = "不方不方";

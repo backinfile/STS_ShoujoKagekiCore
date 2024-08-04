@@ -1,6 +1,6 @@
 package ShoujoKagekiCore.shine.pile;
 
-import ShoujoKagekiCore.ModPath;
+import ShoujoKagekiCore.CoreModPath;
 import ShoujoKagekiCore.shine.DisposableField;
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,7 +19,7 @@ public class DisposedPilePatch {
 
     public static boolean showScreen = false;
     private static boolean showingScreen = false;
-    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ModPath.makeID(DisposedPilePatch.class.getSimpleName()));
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(CoreModPath.makeID(DisposedPilePatch.class.getSimpleName()));
 
 
     @SpirePatch(

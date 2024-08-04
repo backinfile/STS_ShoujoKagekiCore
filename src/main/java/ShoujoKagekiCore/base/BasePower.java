@@ -1,15 +1,59 @@
 package ShoujoKagekiCore.base;
 
 
+import ShoujoKagekiCore.CoreModPath;
+import ShoujoKagekiCore.TextureLoader;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 
 public abstract class BasePower extends AbstractPower {
     public AbstractCreature source = null;
     public boolean exhaustShineCardOnPlay = false; // TODO
+
+
+    public BasePower(String ID, PowerType powerType,
+                     final AbstractCreature owner, final AbstractCreature source, final int amount) {
+        this.ID = ID;
+        PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(ID);
+        name = powerStrings.NAME;
+        description = powerStrings.DESCRIPTIONS[0];
+        DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+
+        this.owner = owner;
+        this.source = source;
+        this.amount = amount;
+
+        type = powerType;
+        isTurnBased = false;
+
+        setTexture(ID);
+        updateDescription();
+    }
+
+    public void setTexture(String ID) {
+        this.region128 = new TextureAtlas.AtlasRegion(TextureLoader.getTexture(getPath84(ID)), 0, 0, 84, 84);
+        this.region48 = new TextureAtlas.AtlasRegion(TextureLoader.getTexture(getPath32(ID)), 0, 0, 32, 32);
+    }
+
+    public static String getPath84(String ID) {
+        String[] split = ID.split(":");
+        String modId = split[0];
+        String powerId = split[1];
+        return CoreModPath.makePowerPath(powerId + "84.png").replace(CoreModPath.getModId(), modId);
+    }
+
+    public static String getPath32(String ID) {
+        String[] split = ID.split(":");
+        String modId = split[0];
+        String powerId = split[1];
+        return CoreModPath.makePowerPath(powerId + "32.png").replace(CoreModPath.getModId(), modId);
+    }
 
     @Override
     public void onRemove() {

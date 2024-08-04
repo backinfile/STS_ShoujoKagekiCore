@@ -1,6 +1,6 @@
 package ShoujoKagekiCore.base;
 
-import ShoujoKagekiCore.ModPath;
+import ShoujoKagekiCore.CoreModPath;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -27,7 +27,7 @@ public abstract class BaseRelic extends CustomRelic {
         String[] split = id.split(":");
         String modid = split[0];
         String relicId = split[1];
-        return ModPath.makeRelicPath(relicId + ".png").replace(ModPath.getModId(), modid);
+        return CoreModPath.makeRelicPath(relicId + ".png").replace(CoreModPath.getModId(), modid);
     }
 
     public void makeTexture(String path) {

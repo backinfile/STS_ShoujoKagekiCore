@@ -1,6 +1,6 @@
 package ShoujoKagekiCore.shine.pile;
 
-import ShoujoKagekiCore.ModPath;
+import ShoujoKagekiCore.CoreModPath;
 import ShoujoKagekiCore.shine.DisposableField;
 import basemod.TopPanelItem;
 import com.badlogic.gdx.graphics.Color;
@@ -18,8 +18,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TopPanelDisposedPileBtn extends TopPanelItem {
-    private static final Texture IMG = new Texture(ModPath.makeUIPath("disposedPile.png"));
-    public static final String ID = ModPath.makeID(TopPanelDisposedPileBtn.class.getSimpleName());
+    private static final Texture IMG = new Texture(CoreModPath.makeUIPath("disposedPile.png"));
+    public static final String ID = CoreModPath.makeID(TopPanelDisposedPileBtn.class.getSimpleName());
     public static final UIStrings UI_STRINGS = CardCrawlGame.languagePack.getUIString(ID);
     public static final String[] TEXT = UI_STRINGS.TEXT;
     private boolean isOpen = false;

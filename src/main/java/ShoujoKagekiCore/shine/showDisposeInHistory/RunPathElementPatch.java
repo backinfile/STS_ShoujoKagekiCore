@@ -1,6 +1,6 @@
 package ShoujoKagekiCore.shine.showDisposeInHistory;
 
-import ShoujoKagekiCore.ModPath;
+import ShoujoKagekiCore.CoreModPath;
 import basemod.ReflectionHacks;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RunPathElementPatch {
-    public static final UIStrings UI_STRINGS = CardCrawlGame.languagePack.getUIString(ModPath.makeID("RunPathElement"));
+    public static final UIStrings UI_STRINGS = CardCrawlGame.languagePack.getUIString(CoreModPath.makeID("RunPathElement"));
     public static final String DISPOSED_CARD_LABEL = UI_STRINGS.TEXT[0];
     public static final String DISPOSED_COUNT_LABEL = UI_STRINGS.TEXT[1];
 

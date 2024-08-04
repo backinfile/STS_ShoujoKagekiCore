@@ -1,10 +1,9 @@
 package ShoujoKagekiCore.base;
 
 import ShoujoKagekiCore.Log;
-import ShoujoKagekiCore.ModPath;
+import ShoujoKagekiCore.CoreModPath;
 import ShoujoKagekiCore.shine.DisposableVariable;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.modthespire.ModInfo;
 import com.evacipated.cardcrawl.modthespire.lib.SpireOverride;
 import com.evacipated.cardcrawl.modthespire.lib.SpireSuper;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -52,7 +51,7 @@ public abstract class BaseCard extends AbstractDefaultCard {
         String[] split = id.split(":");
         String modId = split[0];
         String cardId = split[1];
-        return ModPath.makeCardPath(cardId + ".png").replace(ModPath.getModId(), modId);
+        return CoreModPath.makeCardPath(cardId + ".png").replace(CoreModPath.getModId(), modId);
     }
 
 

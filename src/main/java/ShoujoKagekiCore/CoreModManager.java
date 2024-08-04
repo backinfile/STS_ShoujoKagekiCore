@@ -20,30 +20,30 @@ import java.nio.charset.StandardCharsets;
 @SpireInitializer
 public class CoreModManager implements ISubscriber, EditStringsSubscriber,
         PostInitializeSubscriber, EditKeywordsSubscriber, EditCardsSubscriber {
-    public static final Logger logger = LogManager.getLogger(ModPath.ModName);
+    public static final Logger logger = LogManager.getLogger(CoreModPath.ModName);
 
     private static String modID;
 
     public CoreModManager() {
         BaseMod.subscribe(this);
-        setModID(ModPath.ModName);
+        setModID(CoreModPath.ModName);
         SettingsPanel.initProperties();
     }
 
     public static void initialize() {
-        Log.logger.info("========================= Initializing " + ModPath.ModName + " Mod. =========================");
+        Log.logger.info("========================= Initializing " + CoreModPath.ModName + " Mod. =========================");
         new CoreModManager();
-        Log.logger.info("========================= /" + ModPath.ModName + " Initialized. Hello World./ =========================");
+        Log.logger.info("========================= /" + CoreModPath.ModName + " Initialized. Hello World./ =========================");
     }
 
 
     @Override
     public void receiveEditStrings() {
-        Log.logger.info("Beginning to edit strings for mod with ID: " + ModPath.getModId());
+        Log.logger.info("Beginning to edit strings for mod with ID: " + CoreModPath.getModId());
         String lang = getLang();
 
         BaseMod.loadCustomStringsFile(UIStrings.class,
-                ModPath.getResPath("/localization/" + lang + "/UI-Strings.json"));
+                CoreModPath.getResPath("/localization/" + lang + "/UI-Strings.json"));
         Log.logger.info("Done edittting strings");
     }
 
@@ -60,7 +60,7 @@ public class CoreModManager implements ISubscriber, EditStringsSubscriber,
     public void receiveEditKeywords() {
         Gson gson = new Gson();
         String json = Gdx.files
-                .internal(ModPath.getResPath("/localization/" + getLang() + "/Keyword-Strings.json"))
+                .internal(CoreModPath.getResPath("/localization/" + getLang() + "/Keyword-Strings.json"))
                 .readString(String.valueOf(StandardCharsets.UTF_8));
         com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = gson.fromJson(json,
                 com.evacipated.cardcrawl.mod.stslib.Keyword[].class);

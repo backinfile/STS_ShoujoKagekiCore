@@ -1,6 +1,6 @@
 package ShoujoKagekiCore.shine;
 
-import ShoujoKagekiCore.ModPath;
+import ShoujoKagekiCore.CoreModPath;
 import ShoujoKagekiCore.base.BasePower;
 import basemod.abstracts.AbstractCardModifier;
 import com.badlogic.gdx.graphics.Color;
@@ -13,11 +13,11 @@ import com.megacrit.cardcrawl.localization.UIStrings;
 
 public class ShineCardDescriptionModifier extends AbstractCardModifier {
 
-    public static UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(ModPath.makeID("DisposableKeyword"));
+    public static UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(CoreModPath.makeID("DisposableKeyword"));
 
     public static String[] TEXT = uiStrings.TEXT;
 
-    public static final String ID = ModPath.makeID(ShineCardDescriptionModifier.class.getSimpleName());
+    public static final String ID = CoreModPath.makeID(ShineCardDescriptionModifier.class.getSimpleName());
 
     @Override
     public String identifier(AbstractCard card) {

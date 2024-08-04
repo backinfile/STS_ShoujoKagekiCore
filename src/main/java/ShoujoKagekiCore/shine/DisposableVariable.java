@@ -1,6 +1,6 @@
 package ShoujoKagekiCore.shine;
 
-import ShoujoKagekiCore.ModPath;
+import ShoujoKagekiCore.CoreModPath;
 import ShoujoKagekiCore.util.Utils2;
 import basemod.abstracts.DynamicVariable;
 import basemod.helpers.CardModifierManager;
@@ -15,7 +15,7 @@ public class DisposableVariable extends DynamicVariable { // Shine
 
 
     public String key() {
-        return ModPath.makeID("disposable");
+        return CoreModPath.makeID("disposable");
     }
 
     public boolean isModified(AbstractCard card) {
