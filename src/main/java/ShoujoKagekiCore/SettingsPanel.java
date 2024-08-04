@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static ShoujoKagekiCore.Res.BADGE_IMAGE;
+import static ShoujoKagekiCore.CoreRes.BADGE_IMAGE;
 
 public class SettingsPanel {
 

@@ -1,0 +1,30 @@
+[
+	{
+		"PROPER_NAME": "期待",
+		"NAMES": [
+			"期待"
+		],
+		"DESCRIPTION": "打出其他牌时，或回合结束时， #r消耗 此牌。"
+	},
+	{
+		"PROPER_NAME": "缓冲",
+		"NAMES": [
+			"缓冲"
+		],
+		"DESCRIPTION": "阻止下一次你受到的生命值损伤。"
+	},
+	{
+		"PROPER_NAME": "闪耀",
+		"NAMES": [
+			"闪耀"
+		],
+		"DESCRIPTION": "打出X次后卡牌从 #y牌组 中 #r永久移除 。"
+	},
+	{
+		"PROPER_NAME": "闪耀牌奖励",
+		"NAMES": [
+			"闪耀牌奖励"
+		],
+		"DESCRIPTION": "战斗结束时多掉落 #y1 次仅包含一张 闪耀 牌 的 #y卡牌奖励 。"
+	}
+]

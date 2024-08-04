@@ -1,9 +1,9 @@
 package ShoujoKagekiCore;
 
+import ShoujoKagekiCore.shine.DisposableVariable;
+import ShoujoKagekiCore.util.DefaultSecondMagicNumber;
 import basemod.BaseMod;
-import basemod.interfaces.EditStringsSubscriber;
-import basemod.interfaces.ISubscriber;
-import basemod.interfaces.PostInitializeSubscriber;
+import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
@@ -18,7 +18,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 @SpireInitializer
-public class CoreModManager implements ISubscriber, EditStringsSubscriber, PostInitializeSubscriber {
+public class CoreModManager implements ISubscriber, EditStringsSubscriber,
+        PostInitializeSubscriber, EditKeywordsSubscriber, EditCardsSubscriber {
     public static final Logger logger = LogManager.getLogger(ModPath.ModName);
 
     private static String modID;
@@ -53,6 +54,28 @@ public class CoreModManager implements ISubscriber, EditStringsSubscriber, PostI
         } else {
             return "eng";
         }
+    }
+
+    @Override
+    public void receiveEditKeywords() {
+        Gson gson = new Gson();
+        String json = Gdx.files
+                .internal(ModPath.getResPath("/localization/" + getLang() + "/Keyword-Strings.json"))
+                .readString(String.valueOf(StandardCharsets.UTF_8));
+        com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = gson.fromJson(json,
+                com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
+        if (keywords != null) {
+            for (com.evacipated.cardcrawl.mod.stslib.Keyword keyword : keywords) {
+                BaseMod.addKeyword(keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
+                Log.logger.info("-----------------add keyword: " + keyword.PROPER_NAME);
+            }
+        }
+    }
+    @Override
+    public void receiveEditCards() {
+        pathCheck();
+        BaseMod.addDynamicVariable(new DisposableVariable());
+        BaseMod.addDynamicVariable(new DefaultSecondMagicNumber());
     }
 
 

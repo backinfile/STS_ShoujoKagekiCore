@@ -1,5 +1,6 @@
 package ShoujoKagekiCore.base;
 
+import ShoujoKagekiCore.ModPath;
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -11,16 +12,22 @@ public abstract class BaseRelic extends CustomRelic {
     public boolean screenLess = true;
     public int stokeWidth = 7;
 
-    public BaseRelic(String id, Texture texture, RelicTier tier, LandingSound sfx) {
-        super(id, texture, tier, sfx);
+
+    public BaseRelic(String id, RelicTier tier) {
+        super(id, "", tier, LandingSound.FLAT);
+        makeTexture(getPath(id));
     }
 
-    public BaseRelic(String id, Texture texture, Texture outline, RelicTier tier, LandingSound sfx) {
-        super(id, texture, outline, tier, sfx);
+    public BaseRelic(String id, RelicTier tier, LandingSound landingSound) {
+        super(id, "", tier, landingSound);
+        makeTexture(getPath(id));
     }
 
-    public BaseRelic(String id, String imgName, RelicTier tier, LandingSound sfx) {
-        super(id, imgName, tier, sfx);
+    private static String getPath(String id) {
+        String[] split = id.split(":");
+        String modid = split[0];
+        String relicId = split[1];
+        return ModPath.makeRelicPath(relicId + ".png").replace(ModPath.getModId(), modid);
     }
 
     public void makeTexture(String path) {
