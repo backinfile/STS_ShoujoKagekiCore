@@ -1,0 +1,35 @@
+{
+  "ShoujoKagekiCore:TotalShineDescriptionModifier": {
+    "TEXT": [" NL (总计","点 闪耀 )"],
+    "EXTRA_TEXT": ["demo EXTRA_TEXT"],
+    "TEXT_DICT": {}
+  },
+  "ShoujoKagekiCore:TokenCardField": {
+    "TEXT": ["衍生牌"],
+    "EXTRA_TEXT": ["demo EXTRA_TEXT"],
+    "TEXT_DICT": {}
+  },
+  "ShoujoKagekiCore:settingsPanel": {
+    "TEXT_DICT": {}
+  },
+  "ShoujoKagekiCore:DisposableKeyword": {
+    "TEXT": ["", " NL 闪耀 !ShoujoKageki:disposable! 。", " NL {!ShoujoKageki:disposable!|@=闪耀 !ShoujoKageki:disposable! |<0=永远闪耀 }。{@@}"],
+    "EXTRA_TEXT": ["demo EXTRA_TEXT"],
+    "TEXT_DICT": {}
+  },
+  "ShoujoKagekiCore:DisposedPilePatch": {
+    "TEXT": ["正在查看耗尽牌堆。", "返回"],
+    "EXTRA_TEXT": ["demo EXTRA_TEXT"],
+    "TEXT_DICT": {}
+  },
+  "ShoujoKagekiCore:TopPanelDisposedPileBtn": {
+    "TEXT": ["已耗尽的牌", "查看所有闪耀值耗尽的卡牌。", "耗尽牌堆为空。" ],
+    "EXTRA_TEXT": ["demo EXTRA_TEXT"],
+    "TEXT_DICT": {}
+  },
+  "ShoujoKagekiCore:RunPathElement": {
+    "TEXT": ["耗尽：", " 耗尽"],
+    "EXTRA_TEXT": ["demo EXTRA_TEXT"],
+    "TEXT_DICT": {}
+  }
+}
