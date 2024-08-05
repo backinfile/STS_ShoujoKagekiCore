@@ -1,7 +1,7 @@
 package ShoujoKagekiCore.shine;
 
+import ShoujoKagekiCore.util.Utils2;
 import basemod.ReflectionHacks;
-import com.evacipated.cardcrawl.mod.stslib.StSLib;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.HandCheckAction;
@@ -27,7 +27,7 @@ public class DisposableFieldPatch {
             if (curValue <= 0) {
                 return SpireReturn.Continue();
             }
-            AbstractCard cardInDeck = StSLib.getMasterDeckEquivalent(___targetCard);
+            AbstractCard cardInDeck = Utils2.getMasterDeckEquivalent(___targetCard);
 
             if (curValue == 1 || DisposableField.forceDispose.get(___targetCard)) {
 
@@ -71,7 +71,7 @@ public class DisposableFieldPatch {
             int curValue = DisposableField.disposable.get(___targetCard);
             if (curValue <= 0) return;
 
-            AbstractCard cardInDeck = StSLib.getMasterDeckEquivalent(___targetCard);
+            AbstractCard cardInDeck = Utils2.getMasterDeckEquivalent(___targetCard);
             if (curValue == 1 || DisposableField.forceDispose.get(___targetCard)) {
                 DisposableField.disposeCard(___targetCard);
             } else {

@@ -9,6 +9,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.localization.Keyword;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -62,12 +63,11 @@ public class CoreModManager implements ISubscriber, EditStringsSubscriber,
         String json = Gdx.files
                 .internal(CoreModPath.getResPath("/localization/" + getLang() + "/Keyword-Strings.json"))
                 .readString(String.valueOf(StandardCharsets.UTF_8));
-        com.evacipated.cardcrawl.mod.stslib.Keyword[] keywords = gson.fromJson(json,
-                com.evacipated.cardcrawl.mod.stslib.Keyword[].class);
+        Keyword[] keywords = gson.fromJson(json, Keyword[].class);
         if (keywords != null) {
-            for (com.evacipated.cardcrawl.mod.stslib.Keyword keyword : keywords) {
-                BaseMod.addKeyword(keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
-                Log.logger.info("-----------------add keyword: " + keyword.PROPER_NAME);
+            for (Keyword keyword : keywords) {
+                BaseMod.addKeyword(keyword.NAMES[0], keyword.NAMES, keyword.DESCRIPTION);
+                Log.logger.info("-----------------add keyword: " + keyword.NAMES[0]);
             }
         }
     }

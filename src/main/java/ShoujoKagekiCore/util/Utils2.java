@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.cards.CardGroup.CardGroupType;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
+import java.util.Iterator;
 import java.util.StringJoiner;
 
 public class Utils2 {
@@ -68,5 +69,19 @@ public class Utils2 {
             return false;
         }
         return true;
+    }
+    public static AbstractCard getMasterDeckEquivalent(AbstractCard playingCard) {
+        Iterator var1 = AbstractDungeon.player.masterDeck.group.iterator();
+
+        AbstractCard c;
+        do {
+            if (!var1.hasNext()) {
+                return null;
+            }
+
+            c = (AbstractCard)var1.next();
+        } while(!c.uuid.equals(playingCard.uuid));
+
+        return c;
     }
 }

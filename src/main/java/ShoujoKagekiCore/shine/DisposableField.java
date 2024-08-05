@@ -6,7 +6,6 @@ import ShoujoKagekiCore.shine.showDisposeInHistory.MetricDataPatch;
 import ShoujoKagekiCore.token.TokenCardField;
 import ShoujoKagekiCore.util.ActionUtils;
 import ShoujoKagekiCore.util.Utils2;
-import com.evacipated.cardcrawl.mod.stslib.StSLib;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -40,7 +39,7 @@ public class DisposableField {
     }
 
     public static void disposeCard(AbstractCard card, float x, float y) {
-        AbstractCard cardInDeck = StSLib.getMasterDeckEquivalent(card);
+        AbstractCard cardInDeck = Utils2.getMasterDeckEquivalent(card);
         if (cardInDeck != null) {
             AbstractDungeon.player.masterDeck.removeCard(cardInDeck);
         }

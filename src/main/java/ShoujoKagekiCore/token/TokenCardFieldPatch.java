@@ -5,7 +5,6 @@ import ShoujoKagekiCore.CoreModPath;
 import ShoujoKagekiCore.util.Utils2;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.mod.stslib.StSLib;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.unique.AddCardToDeckAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -40,7 +39,7 @@ public class TokenCardFieldPatch {
             cardGroups.add(AbstractDungeon.player.masterDeck);
             for (CardGroup cardGroup : cardGroups) {
                 for (AbstractCard card : cardGroup.group) {
-                    if (StSLib.getMasterDeckEquivalent(card) != null) {
+                    if (Utils2.getMasterDeckEquivalent(card) != null) {
                         TokenCardField.isToken.set(card, false);
                     }
                 }
@@ -126,7 +125,7 @@ public class TokenCardFieldPatch {
     public static class OnAddToHand {
         public static void Postfix(CardGroup __instance, AbstractCard ___c) {
             if (!TokenCardField.isToken.get(___c)) return;
-            if (StSLib.getMasterDeckEquivalent(___c) != null) {
+            if (Utils2.getMasterDeckEquivalent(___c) != null) {
                 TokenCardField.isToken.set(___c, false);
             }
         }
