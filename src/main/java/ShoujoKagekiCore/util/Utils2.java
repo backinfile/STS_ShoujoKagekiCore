@@ -3,11 +3,15 @@ package ShoujoKagekiCore.util;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.CardGroup.CardGroupType;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.StringJoiner;
+import java.util.function.Function;
 
 public class Utils2 {
     public static AbstractCard makeCardCopyOnlyWithUpgrade(AbstractCard source) {
@@ -61,6 +65,7 @@ public class Utils2 {
         }
         return true;
     }
+
     public static boolean inRoom() {
         if (!AbstractDungeon.isPlayerInDungeon() || AbstractDungeon.player == null || AbstractDungeon.player.hand == null) {
             return false;
@@ -70,6 +75,7 @@ public class Utils2 {
         }
         return true;
     }
+
     public static AbstractCard getMasterDeckEquivalent(AbstractCard playingCard) {
         Iterator var1 = AbstractDungeon.player.masterDeck.group.iterator();
 
@@ -79,9 +85,24 @@ public class Utils2 {
                 return null;
             }
 
-            c = (AbstractCard)var1.next();
-        } while(!c.uuid.equals(playingCard.uuid));
+            c = (AbstractCard) var1.next();
+        } while (!c.uuid.equals(playingCard.uuid));
 
         return c;
+    }
+
+
+    public static final ArrayList<Function<AbstractPlayer, List<AbstractCard>>> bagProviders = new ArrayList<>();
+    public static ArrayList<AbstractCard> getAllCardsInCombat(AbstractPlayer player) {
+        ArrayList<AbstractCard> cards = new ArrayList<>();
+        cards.addAll(player.drawPile.group);
+        cards.addAll(player.discardPile.group);
+        cards.addAll(player.exhaustPile.group);
+        cards.addAll(player.hand.group);
+        for (Function<AbstractPlayer, List<AbstractCard>> provider : bagProviders) {
+            List<AbstractCard> bagCards = provider.apply(player);
+            if (bagCards != null) cards.addAll(bagCards);
+        }
+        return cards;
     }
 }
