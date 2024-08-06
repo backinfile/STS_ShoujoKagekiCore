@@ -3,6 +3,8 @@ package ShoujoKagekiCore.base;
 
 import ShoujoKagekiCore.CoreModPath;
 import ShoujoKagekiCore.TextureLoader;
+import ShoujoKagekiCore.effects.LightFlashPowerEffect;
+import basemod.ReflectionHacks;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -10,12 +12,18 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
+
+import java.util.ArrayList;
 
 
 public abstract class BasePower extends AbstractPower {
     public AbstractCreature source = null;
     public boolean exhaustShineCardOnPlay = false; // TODO
 
+    public boolean longPulse;
+    private long longPulseEndTime;
+    protected long pulseGap = 1000L;
 
     public BasePower(String ID, PowerType powerType,
                      final AbstractCreature owner, final AbstractCreature source, final int amount) {
@@ -41,14 +49,14 @@ public abstract class BasePower extends AbstractPower {
         this.region48 = new TextureAtlas.AtlasRegion(TextureLoader.getTexture(getPath32(ID)), 0, 0, 32, 32);
     }
 
-    public static String getPath84(String ID) {
+    private static String getPath84(String ID) {
         String[] split = ID.split(":");
         String modId = split[0];
         String powerId = split[1];
         return CoreModPath.makePowerPath(powerId + "84.png").replace(CoreModPath.getModId(), modId);
     }
 
-    public static String getPath32(String ID) {
+    private static String getPath32(String ID) {
         String[] split = ID.split(":");
         String modId = split[0];
         String powerId = split[1];
@@ -57,6 +65,26 @@ public abstract class BasePower extends AbstractPower {
 
     @Override
     public void onRemove() {
+    }
+
+    public void startLongPulse() {
+        if (longPulse) return;
+        longPulse = true;
+        longPulseEndTime = System.currentTimeMillis() + pulseGap;
+    }
+
+    public void stopPulse() {
+        longPulse = false;
+    }
+
+    @Override
+    public void update(int slot) {
+        if (longPulse && longPulseEndTime < System.currentTimeMillis()) {
+            longPulseEndTime = System.currentTimeMillis() + pulseGap;
+            ArrayList<AbstractGameEffect> effect = ReflectionHacks.getPrivate(this, AbstractPower.class, "effect");
+            effect.add(new LightFlashPowerEffect(this));
+        }
+        super.update(slot);
     }
 
 

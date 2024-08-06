@@ -198,4 +198,7 @@ public abstract class BaseCard extends AbstractDefaultCard {
 //            initializeDescription();
 //        }
     }
+
+    public void onObtainThis() {
+    }
 }
