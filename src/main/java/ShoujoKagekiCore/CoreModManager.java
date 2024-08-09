@@ -37,6 +37,13 @@ public class CoreModManager implements ISubscriber, EditStringsSubscriber,
         Log.logger.info("========================= /" + CoreModPath.ModName + " Initialized. Hello World./ =========================");
     }
 
+    public static void sideload() {
+        Log.logger.info("========================= Initializing " + CoreModPath.ModName + " Mod. =========================");
+        new CoreModManager();
+        Log.logger.info("========================= /" + CoreModPath.ModName + " Initialized. Hello World./ =========================");
+
+    }
+
 
     @Override
     public void receiveEditStrings() {
@@ -71,6 +78,7 @@ public class CoreModManager implements ISubscriber, EditStringsSubscriber,
             }
         }
     }
+
     @Override
     public void receiveEditCards() {
         pathCheck();

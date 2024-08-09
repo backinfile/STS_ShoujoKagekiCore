@@ -51,7 +51,7 @@ public abstract class BaseCard extends AbstractDefaultCard {
         String[] split = id.split(":");
         String modId = split[0];
         String cardId = split[1];
-        return CoreModPath.makeCardPath(cardId + ".png").replace(CoreModPath.getModId(), modId);
+        return CoreModPath.makeCardPath(cardId + ".png").replace(CoreModPath.ModName, modId);
     }
 
 

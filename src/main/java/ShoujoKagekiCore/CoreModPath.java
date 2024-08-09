@@ -8,14 +8,14 @@ public class CoreModPath {
 
 
     public static String makeID(String idText) {
-        return getModId() + ":" + idText;
+        return ModName + ":" + idText;
     }
     public static String getFullModName() {
         return AUTHOR + ":" + getModId();
     }
 
     public static String getResPath(String relativePath) {
-        return getModId() + "Resources" + relativePath;
+        return ModName + "Resources" + relativePath;
     }
     public static String makeCardPath(String resourcePath) {
         return getResPath("/images/cards/" + resourcePath);

@@ -15,7 +15,6 @@ public class ShineCardDescriptionModifier extends AbstractCardModifier {
 
     public static UIStrings uiStrings = CardCrawlGame.languagePack.getUIString(CoreModPath.makeID("DisposableKeyword"));
 
-    public static String[] TEXT = uiStrings.TEXT;
 
     public static final String ID = CoreModPath.makeID(ShineCardDescriptionModifier.class.getSimpleName());
 
@@ -26,10 +25,10 @@ public class ShineCardDescriptionModifier extends AbstractCardModifier {
 
     @Override
     public String modifyDescription(String rawDescription, AbstractCard card) {
-        if (rawDescription.endsWith(TEXT[3])) {
-            return TEXT[0] + rawDescription + TEXT[1];
+        if (rawDescription.endsWith(uiStrings.TEXT[3])) {
+            return uiStrings.TEXT[0] + rawDescription + uiStrings.TEXT[1];
         }
-        return TEXT[0] + rawDescription + TEXT[2] + TEXT[1];
+        return uiStrings.TEXT[0] + rawDescription + uiStrings.TEXT[2] + uiStrings.TEXT[1];
     }
 
     @Override

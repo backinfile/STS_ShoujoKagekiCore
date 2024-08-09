@@ -8,6 +8,10 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public abstract class BaseRelic extends CustomRelic {
     public boolean screenLess = true;
     public int stokeWidth = 7;
@@ -30,6 +34,8 @@ public abstract class BaseRelic extends CustomRelic {
         return CoreModPath.makeRelicPath(relicId + ".png").replace(CoreModPath.getModId(), modid);
     }
 
+    private final static HashMap<String, List<Texture>> textureCacheMap = new HashMap<>();
+
     public void makeTexture(String path) {
 //        Texture relicTexture = TextureLoader.getTexture(ModInfo.makeRelicPath(rawId + ".png"));
 //        Texture outlineTexture = TextureLoader.getTexture(ModInfo.makeRelicOutlinePath(rawId + ".png"));
@@ -37,33 +43,40 @@ public abstract class BaseRelic extends CustomRelic {
 //        outlineTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 //        this.setTextureOutline(relicTexture, outlineTexture);
 
-        Pixmap texture = new Pixmap(Gdx.files.internal(path));
-        int width = texture.getWidth();
-        int height = texture.getHeight();
+        if (textureCacheMap.get(path) == null) {
+            Pixmap texture = new Pixmap(Gdx.files.internal(path));
+            int width = texture.getWidth();
+            int height = texture.getHeight();
 //            Log.logger.info("=================== {} {} {}", width, height, rawId);
-        Pixmap outline = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-        outline.setColor(Color.WHITE);
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                if (hasColorAround(texture, i, j)) {
-                    outline.drawPixel(i, j);
+            Pixmap outline = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+            outline.setColor(Color.WHITE);
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                    if (hasColorAround(texture, i, j)) {
+                        outline.drawPixel(i, j);
+                    }
                 }
             }
-        }
-        outline.setColor(new Color(1f, 1f, 1f, 0.5f));
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                if (outline.getPixel(i, j) != 0 && !allAdjColored(texture, i, j)) {
-                    outline.drawPixel(i, j);
+            outline.setColor(new Color(1f, 1f, 1f, 0.5f));
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                    if (outline.getPixel(i, j) != 0 && !allAdjColored(texture, i, j)) {
+                        outline.drawPixel(i, j);
+                    }
                 }
             }
+            Texture relicTexture = new Texture(texture);
+            Texture outlineTexture = new Texture(outline);
+            relicTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            outlineTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            ArrayList<Texture> textures = new ArrayList<>();
+            textures.add(relicTexture);
+            textures.add(outlineTexture);
+            textureCacheMap.put(path, textures);
         }
 
-        Texture relicTexture = new Texture(texture);
-        Texture outlineTexture = new Texture(outline);
-        relicTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        outlineTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        this.setTextureOutline(relicTexture, outlineTexture);
+        List<Texture> textures = textureCacheMap.get(path);
+        this.setTextureOutline(textures.get(0), textures.get(1));
     }
 
 
