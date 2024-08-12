@@ -1,6 +1,7 @@
 package ShoujoKagekiCore.shine;
 
 import ShoujoKagekiCore.CoreModPath;
+import ShoujoKagekiCore.Log;
 import ShoujoKagekiCore.base.BasePower;
 import basemod.abstracts.AbstractCardModifier;
 import com.badlogic.gdx.graphics.Color;

@@ -1,8 +1,8 @@
 {
   "modid": "ShoujoKagekiCore",
-  "name": "【少女歌剧】核心包ShoujoKageki Core Package",
+  "name": "【少女歌剧】额外包ShoujoKageki Extra Package",
   "author_list": ["不方不方", "tmc", "量子蟒蛇"],
-  "description": "其他少女歌剧模组的依赖包，需要先于其他模组加载。ShoujoKageki Core Package",
+  "description": "少女歌剧额外包。ShoujoKageki Extra Package",
   "version": "0.0.1",
   "sts_version": "06-15-2018",
   "mts_version": "2.7.0"

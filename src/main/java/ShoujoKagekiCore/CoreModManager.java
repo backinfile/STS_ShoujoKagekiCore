@@ -73,7 +73,7 @@ public class CoreModManager implements ISubscriber, EditStringsSubscriber,
         Keyword[] keywords = gson.fromJson(json, Keyword[].class);
         if (keywords != null) {
             for (Keyword keyword : keywords) {
-                BaseMod.addKeyword(keyword.NAMES[0], keyword.NAMES, keyword.DESCRIPTION);
+                BaseMod.addKeyword(CoreModPath.ModName.toLowerCase(), keyword.NAMES[0], keyword.NAMES, keyword.DESCRIPTION);
                 Log.logger.info("-----------------add keyword: " + keyword.NAMES[0]);
             }
         }
