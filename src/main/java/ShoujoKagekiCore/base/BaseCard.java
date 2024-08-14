@@ -47,7 +47,7 @@ public abstract class BaseCard extends AbstractDefaultCard {
         initNameAndDescription(id);
     }
 
-    private static String makeCardPath(String id) {
+    protected static String makeCardPath(String id) {
         String[] split = id.split(":");
         String modId = split[0];
         String cardId = split[1];

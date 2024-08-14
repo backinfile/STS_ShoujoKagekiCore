@@ -5,6 +5,10 @@ import ShoujoKagekiCore.CoreModPath;
 import ShoujoKagekiCore.TextureLoader;
 import ShoujoKagekiCore.effects.LightFlashPowerEffect;
 import basemod.ReflectionHacks;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -15,6 +19,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public abstract class BasePower extends AbstractPower {
@@ -45,8 +50,9 @@ public abstract class BasePower extends AbstractPower {
     }
 
     public void setTexture(String ID) {
-        this.region128 = new TextureAtlas.AtlasRegion(TextureLoader.getTexture(getPath84(ID)), 0, 0, 84, 84);
-        this.region48 = new TextureAtlas.AtlasRegion(TextureLoader.getTexture(getPath32(ID)), 0, 0, 32, 32);
+        String path84 = getPath84(ID);
+        this.region128 = new TextureAtlas.AtlasRegion(TextureLoader.getTexture(path84), 0, 0, 84, 84);
+        this.region48 = new TextureAtlas.AtlasRegion(makeTexture32(path84), 0, 0, 32, 32);
     }
 
     private static String getPath84(String ID) {
@@ -61,6 +67,26 @@ public abstract class BasePower extends AbstractPower {
         String modId = split[0];
         String powerId = split[1];
         return CoreModPath.makePowerPath(powerId + "32.png").replace(CoreModPath.getModId(), modId);
+    }
+
+    private static final HashMap<String, Texture> texture32_cache_map = new HashMap<>();
+
+    private static Texture makeTexture32(String path84) {
+        if (!texture32_cache_map.containsKey(path84)) {
+//            Texture texture84 = TextureLoader.getTexture(path84);
+            FileHandle file = Gdx.files.internal(path84);
+            if (!file.exists()) {
+                return TextureLoader.getTexture(path84);
+            }
+            Pixmap pixmap84 = new Pixmap(file);
+            Pixmap pixmap32 = new Pixmap(32, 32, Pixmap.Format.RGBA8888);
+            pixmap32.drawPixmap(pixmap84, 0, 0, 84, 84, 0, 0, 32, 32);
+
+            pixmap84.dispose();
+            Texture texture32 = new Texture(pixmap32);
+            texture32_cache_map.put(path84, texture32);
+        }
+        return texture32_cache_map.get(path84);
     }
 
     @Override
